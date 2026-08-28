@@ -1,3 +1,11 @@
+Question:
+Given an integer array nums, move all the even integers at the beginning of the array followed by all the odd integers.
+
+Return any array that satisfies this condition
+
+
+
+PROGRAM:
 class Solution {
     public int[] sortArrayByParity(int[] nums) {
         int left = 0;
