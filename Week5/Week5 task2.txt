@@ -1,0 +1,81 @@
+Question:
+We define subsequence as any subset of an array. We define a subarray as a contiguous subsequence in an array.
+Given an array, find the maximum possible sum among:
+all nonempty subarrays.
+all nonempty subsequences.
+Print the two values as space-separated integers on one line.
+Note that empty subarrays/subsequences should not be considered.
+Example
+The maximum subarray sum is comprised of elements at inidices . Their sum is . The maximum subsequence sum is comprised of elements at indices  and their sum is .
+Function Description
+Complete the maxSubarray function in the editor below.
+maxSubarray has the following parameter(s):
+int arr[n]: an array of integers
+Returns
+int[2]: the maximum subarray and subsequence sums
+Input Format
+The first line of input contains a single integer , the number of test cases.
+The first line of each test case contains a single integer .
+The second line contains  space-separated integers  where .
+Constraints
+The subarray and subsequences you consider should have at least one element.
+Sample Input 0
+2
+4
+1 2 3 4
+6
+2 -1 2 3 4 -5
+Sample Output 0
+
+10 10
+10 11
+
+
+Program:
+import java.util.*;
+
+public class Solution {
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        int t = sc.nextInt();
+
+        while (t-- > 0) {
+            int n = sc.nextInt();
+            int[] arr = new int[n];
+
+            for (int i = 0; i < n; i++) {
+                arr[i] = sc.nextInt();
+            }
+
+            // Maximum Subarray Sum (Kadane's Algorithm)
+            int maxSubarray = arr[0];
+            int currentSum = arr[0];
+
+            for (int i = 1; i < n; i++) {
+                currentSum = Math.max(arr[i], currentSum + arr[i]);
+                maxSubarray = Math.max(maxSubarray, currentSum);
+            }
+
+            // Maximum Subsequence Sum
+            int maxSubsequence = 0;
+            int maxElement = arr[0];
+
+            for (int num : arr) {
+                if (num > 0) {
+                    maxSubsequence += num;
+                }
+                maxElement = Math.max(maxElement, num);
+            }
+
+            if (maxSubsequence == 0) {
+                maxSubsequence = maxElement;
+            }
+
+            System.out.println(maxSubarray + " " + maxSubsequence);
+        }
+
+        sc.close();
+    }
+}
